@@ -13,6 +13,13 @@ import PublicRoute from "./components/PublicRoute";
 import { NotFoundPage } from "./pages/notFound/NotFoundPage";
 import bg from "./assets/bg.jpg";
 import HomePage from "./pages/home/HomePage";
+import { LiveChatPage } from "./pages/liveChat/LiveChatPage";
+import ProductPage from "./pages/product/ProductPage";
+import { BannerPage } from "./pages/banner/BannerPage";
+import { PromotionPage } from "./pages/promotion/PromotionPage";
+import { WarantyPage } from "./pages/warranty/WarantyPage";
+import { OrderPage } from "./pages/order/OrderPage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 function App() {
   const isAuthenticated = useSelector(
     (state: RootState) => state.user.isAuthenticated
@@ -40,14 +47,31 @@ function App() {
               outlet={<HomePage />}
             />
           }
+        >
           //các nested route
-        />
+          <Route index element={<DashboardPage />} />
+          <Route path="/product" element={<ProductPage />} />
+          <Route path="/banner" element={<BannerPage />} />
+          <Route path="/promotion" element={<PromotionPage />} />
+          <Route path="/warranty" element={<WarantyPage />} />
+          <Route path="/order" element={<OrderPage />} />
+        </Route>
+
         <Route
           path="/login"
           element={
             <PublicRoute
               {...defaultProtectedRouteProps}
               outlet={<LoginPage />}
+            />
+          }
+        />
+        <Route
+          path="/live-chat"
+          element={
+            <ProtectedRoute
+              {...defaultProtectedRouteProps}
+              outlet={<LiveChatPage />}
             />
           }
         />

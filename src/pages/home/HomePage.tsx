@@ -1,6 +1,15 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from "./../../assets/gearvn.png";
-import { Github } from "lucide-react";
+import {
+  ClipboardList,
+  Github,
+  Home,
+  LaptopMinimal,
+  LayoutDashboard,
+  LogOut,
+  ShieldCheck,
+  TicketPercent,
+} from "lucide-react";
 import { RootState, useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
 import { logOut } from "../../slice/user.slice";
@@ -33,7 +42,11 @@ const HomePage = () => {
           </div>
         </Link>
         <div className="flex gap-4 items-center">
-          <button className="btn btn-error hover:opacity-75">Live Chat</button>
+          <Link to={"/live-chat"}>
+            <button className="btn btn-error hover:opacity-75">
+              Live Chat
+            </button>
+          </Link>
           <div className="dropdown">
             <label className="btn p-0 rounded-full " tabIndex={0}>
               <div className="avatar flex bg-red-600">
@@ -55,8 +68,100 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-12 h-full flex-1 mb-4 px-4">
-        <div className="rounded-l-xl col-span-2 h-full text-white">Navbar</div>
+      <div className="grid grid-cols-12 h-full flex-1 mb-4 px-4 gap-4">
+        <div className="rounded-l-xl col-span-2 h-full text-white">
+          <ul className="flex flex-col gap-3">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#37373a] px-4 py-2 rounded-md"
+                  : "px-4 py-2 hover:bg-[#212226] rounded-md"
+              }
+            >
+              <span className="flex items-center gap-2">
+                <Home size={20} />
+                Thống kê
+              </span>
+            </NavLink>
+            <NavLink
+              to="/product"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#37373a] px-4 py-2 rounded-md"
+                  : "px-4 py-2 hover:bg-[#212226] rounded-md"
+              }
+            >
+              <span className="flex items-center gap-2">
+                <LaptopMinimal size={20} />
+                Sản phẩm
+              </span>
+            </NavLink>
+            <NavLink
+              to="/banner"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#37373a] px-4 py-2 rounded-md"
+                  : "px-4 py-2 hover:bg-[#212226] rounded-md"
+              }
+            >
+              <span className="flex items-center gap-2">
+                <LayoutDashboard size={20} />
+                Quảng cáo
+              </span>
+            </NavLink>
+            <NavLink
+              to="/promotion"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#37373a] px-4 py-2 rounded-md"
+                  : "px-4 py-2 hover:bg-[#212226] rounded-md"
+              }
+            >
+              <span className="flex items-center gap-2">
+                <TicketPercent size={20} />
+                Khuyến mãi
+              </span>
+            </NavLink>
+            <NavLink
+              to="/warranty"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#37373a] px-4 py-2 rounded-md"
+                  : "px-4 py-2 hover:bg-[#212226] rounded-md"
+              }
+            >
+              <span className="flex items-center gap-2">
+                <ShieldCheck size={20} />
+                Bảo hành
+              </span>
+            </NavLink>
+            <NavLink
+              to="/order"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#37373a] px-4 py-2 rounded-md"
+                  : "px-4 py-2 hover:bg-[#212226] rounded-md"
+              }
+            >
+              <span className="flex items-center gap-2">
+                <ClipboardList size={20} />
+                Đơn hàng
+              </span>
+            </NavLink>
+            <li>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 w-full rounded-md text-start hover:bg-[#212226]"
+              >
+                <span className="flex items-center gap-2">
+                  <LogOut size={20} />
+                  Đăng xuất
+                </span>
+              </button>
+            </li>
+          </ul>
+        </div>
         <div className="rounded-xl col-span-10 bg-white h-full">
           <Outlet />
         </div>
