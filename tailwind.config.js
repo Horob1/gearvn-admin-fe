@@ -50,7 +50,24 @@ export default {
       "5xl": "3rem",
       "6xl": "4rem",
     },
-    extend: {},
+    extend: {
+      colors: {
+        main: "#15161B",
+      },
+      keyframes: {
+        growth: {
+          "0%": {
+            transform: "scale(0)",
+          },
+          "100%": {
+            transform: "scale(1)",
+          },
+        },
+      },
+      animation: {
+        growth: "growth 0.5s ease-in-out",
+      },
+    },
   },
   variants: {},
   plugins: [rippleui],

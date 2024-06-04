@@ -11,7 +11,8 @@ import { RootState } from "./store";
 import { useSelector } from "react-redux";
 import PublicRoute from "./components/PublicRoute";
 import { NotFoundPage } from "./pages/notFound/NotFoundPage";
-
+import bg from "./assets/bg.jpg";
+import HomePage from "./pages/home/HomePage";
 function App() {
   const isAuthenticated = useSelector(
     (state: RootState) => state.user.isAuthenticated
@@ -21,16 +22,25 @@ function App() {
   };
 
   return (
-    <>
+    <div
+      className="flex w-full h-[100vh]"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <Routes>
         <Route
           path="/"
           element={
             <ProtectedRoute
               {...defaultProtectedRouteProps}
-              outlet={<>Home</>}
+              outlet={<HomePage />}
             />
           }
+          //các nested route
         />
         <Route
           path="/login"
@@ -45,7 +55,7 @@ function App() {
       </Routes>
       <Toaster position="bottom-right" reverseOrder={false} />
       <GetUserInfo />
-    </>
+    </div>
   );
 }
 

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "./../utils/customAxios.ts";
 import { UserType } from "../types/user.type.ts";
+import toast from "react-hot-toast";
 
 const isAuth =
   localStorage !== null ? JSON.parse(localStorage.getItem("user")!) : false;
@@ -35,6 +36,7 @@ const userSlice = createSlice({
     logOut: (state) => {
       state.info = initialState.info;
       state.isAuthenticated = false;
+      toast.success("Đăng xuất thành công!");
       localStorage.setItem("user", JSON.stringify(state.isAuthenticated));
     },
   },
@@ -46,6 +48,7 @@ const userSlice = createSlice({
       state.info.staffCode = action?.payload?.user?.staffCode ?? "";
       state.info.role = action?.payload?.user?.role ?? "";
       state.isAuthenticated = true;
+      toast.success("Chào mừng " + state.info.name + " đã quay trở lại!");
       localStorage.setItem("user", JSON.stringify(state.isAuthenticated));
     });
     builder.addCase(getMe.rejected, (state) => {
