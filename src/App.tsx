@@ -20,10 +20,12 @@ import { PromotionPage } from "./pages/promotion/PromotionPage";
 import { WarantyPage } from "./pages/warranty/WarantyPage";
 import { OrderPage } from "./pages/order/OrderPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
+import { AdminPage } from "./pages/admin/AdminPage";
 function App() {
   const isAuthenticated = useSelector(
     (state: RootState) => state.user.isAuthenticated
   );
+  const role = useSelector((state: RootState) => state.user.info.role);
   const defaultProtectedRouteProps: Omit<ProtectedRouteProps, "outlet"> = {
     isAuthenticated: isAuthenticated,
   };
@@ -55,6 +57,9 @@ function App() {
           <Route path="/promotion" element={<PromotionPage />} />
           <Route path="/warranty" element={<WarantyPage />} />
           <Route path="/order" element={<OrderPage />} />
+          {role === "admin" && (
+            <Route path="/admin" element={<AdminPage />}></Route>
+          )}
         </Route>
 
         <Route

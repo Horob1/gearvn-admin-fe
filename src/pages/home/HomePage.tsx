@@ -6,6 +6,7 @@ import {
   Home,
   LaptopMinimal,
   LayoutDashboard,
+  Lock,
   LogOut,
   ShieldCheck,
   TicketPercent,
@@ -149,6 +150,21 @@ const HomePage = () => {
                 Đơn hàng
               </span>
             </NavLink>
+            {userInfo.role === "admin" && (
+              <NavLink
+                to="/admin"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-[#37373a] px-4 py-2 rounded-md"
+                    : "px-4 py-2 hover:bg-[#212226] rounded-md"
+                }
+              >
+                <span className="flex items-center gap-2">
+                  <Lock size={20} />
+                  Admin
+                </span>
+              </NavLink>
+            )}
             <li>
               <button
                 onClick={handleLogout}
@@ -162,7 +178,7 @@ const HomePage = () => {
             </li>
           </ul>
         </div>
-        <div className="rounded-xl col-span-10 bg-white h-full">
+        <div className="rounded-xl col-span-10 bg-white min-h-[680px]">
           <Outlet />
         </div>
       </div>
