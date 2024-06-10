@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div
-      className="flex w-full h-[100vh]"
+      className="flex w-full min-h-[100vh] "
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
