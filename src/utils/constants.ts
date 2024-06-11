@@ -9,7 +9,7 @@ export const TYPE_DEVICE = [
   "Monitor",
   "Mouse",
 ];
-export const TECH_SPECIFICATION : string[] = [
+export const TECH_SPECIFICATION: string[] = [
   "CPU",
   "RAM",
   "storage",
@@ -51,4 +51,13 @@ export const BRANDS = [
   "HyperX",
   "Apple",
   "Sony",
+];
+
+export const ORDER_TAB = [
+  { titile: "Tất cả" },
+  { titile: "Chưa chấp nhận" },
+  { titile: "Đã chấp nhận" },
+  { titile: "Đang giao" },
+  { titile: "Đã hoàn thành" },
+  { titile: "Đã hủy" },
 ];

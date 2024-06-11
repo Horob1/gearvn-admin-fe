@@ -4,6 +4,7 @@ import userSlice from "./slice/user.slice";
 import bannerSlice from "./slice/banner.slice";
 import promotionSlide from "./slice/promotion.slice";
 import productSlice from "./slice/product.slice";
+import orderSlice from "./slice/order.slice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     banner: bannerSlice,
     promotion: promotionSlide,
     product: productSlice,
+    order: orderSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
 });
