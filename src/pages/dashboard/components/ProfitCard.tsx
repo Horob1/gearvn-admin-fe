@@ -94,7 +94,7 @@ export const ProfitCard = () => {
             <span className={`${per > 0 ? "text-success" : "text-error"}`}>
               {per}%
             </span>{" "}
-            <span>Since last week</span>
+            <span>Since last month</span>
           </div>
         </>
       )}

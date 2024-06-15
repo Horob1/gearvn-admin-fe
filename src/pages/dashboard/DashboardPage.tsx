@@ -23,7 +23,7 @@ const DashboardPage = () => {
       </div>
       <div className="p-4 col-span-8 bg-slate-100 rounded-md flex flex-col">
         <h1 className="text-lg font-semibold text-error">
-          Thống kê đơn hàng {import.meta.env.VITE_CURRENT_YEAR}:
+          Monthly Revenue Overview in {import.meta.env.VITE_CURRENT_YEAR}:
         </h1>
         <MonthChart />
       </div>
