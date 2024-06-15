@@ -1,11 +1,13 @@
-import { ClipboardList, Edit, Eye } from "lucide-react";
+import { ClipboardList, Edit } from "lucide-react";
 import { GetOrders } from "./components/GetOrders";
 import { useState } from "react";
 import { ORDER_TAB, PAGE_ITEMS } from "../../utils/constants";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { convertDate } from "../../utils/convertDate";
-import { setTabAction } from "../../slice/order.slice";
+import { setCurrentOrder, setTabAction } from "../../slice/order.slice";
+import { ModalAddOrder } from "./components/ModalAddOrder";
+import { UpdateOrder } from "./components/UpdateOrder";
 
 export const OrderPage = () => {
   const [tab, setTab] = useState<number>(0);
@@ -22,6 +24,7 @@ export const OrderPage = () => {
           <ClipboardList size={28} />
           <h1 className="text-2xl font-semibold">Đơn hàng</h1>
         </div>
+        <ModalAddOrder />
       </div>
       <div className="flex flex-col gap-4">
         <div className="tabs m-auto">
@@ -50,9 +53,11 @@ export const OrderPage = () => {
                   <tr>
                     <th>STT</th>
                     <th>ID</th>
+                    <th>Người đặt</th>
+                    <th>email</th>
+                    <th>Phone</th>
                     <th>Ngày tạo</th>
                     <th>Trạng thái</th>
-                    <th>View</th>
                     <th>Update</th>
                   </tr>
                 </thead>
@@ -67,16 +72,30 @@ export const OrderPage = () => {
                       )
                       .map((item, index) => (
                         <tr key={item._id}>
-                          <th>{index + 1 + (page - 1) * PAGE_ITEMS}</th>
-                          <th>{item._id}</th>
-                          <th>{convertDate(item.createAt)}</th>
-                          <th>{item.status}</th>
-                          <th>
-                            <Eye />
-                          </th>
-                          <th>
-                            <Edit />
-                          </th>
+                          <td>{index + 1 + (page - 1) * PAGE_ITEMS}</td>
+                          <td>{item._id}</td>
+                          <td>{item.name}</td>
+                          <td>{item.email}</td>
+                          <td>{item.phone}</td>
+                          <td>{convertDate(item.createAt)}</td>
+                          <td>{item.status}</td>
+                          <td>
+                            {!(
+                              item?.status === "rejected" ||
+                              item.status === "completed"
+                            ) && (
+                              <label
+                                htmlFor="update-modal-order"
+                                className="cursor-pointer"
+                              >
+                                <Edit
+                                  onClick={() => {
+                                    dispatch(setCurrentOrder(item));
+                                  }}
+                                />
+                              </label>
+                            )}
+                          </td>
                         </tr>
                       ))}
                   {current &&
@@ -90,16 +109,30 @@ export const OrderPage = () => {
                       )
                       .map((item, index) => (
                         <tr key={item._id}>
-                          <th>{index + 1 + (page - 1) * PAGE_ITEMS}</th>
-                          <th>{item._id}</th>
-                          <th>{convertDate(item.createAt)}</th>
-                          <th>{item.status}</th>
-                          <th>
-                            <Eye />
-                          </th>
-                          <th>
-                            <Edit />
-                          </th>
+                          <td>{index + 1 + (page - 1) * PAGE_ITEMS}</td>
+                          <td>{item._id}</td>
+                          <td>{item.name}</td>
+                          <td>{item.email}</td>
+                          <td>{item.phone}</td>
+                          <td>{convertDate(item.createAt)}</td>
+                          <td>{item.status}</td>
+                          <td>
+                            {!(
+                              item?.status === "rejected" ||
+                              item.status === "completed"
+                            ) && (
+                              <label
+                                htmlFor="update-modal-order"
+                                className="cursor-pointer"
+                              >
+                                <Edit
+                                  onClick={() => {
+                                    dispatch(setCurrentOrder(item));
+                                  }}
+                                />
+                              </label>
+                            )}
+                          </td>
                         </tr>
                       ))}
                 </tbody>
@@ -155,6 +188,7 @@ export const OrderPage = () => {
           <div className="skeleton h-[500px] rounded-md"></div>
         )}
       </div>
+      <UpdateOrder />
       <GetOrders />
     </div>
   );

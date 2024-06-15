@@ -57,9 +57,10 @@ function App() {
           <Route path="/promotion" element={<PromotionPage />} />
           <Route path="/warranty" element={<WarantyPage />} />
           <Route path="/order" element={<OrderPage />} />
-          {role === "admin" && (
-            <Route path="/admin" element={<AdminPage />}></Route>
-          )}
+          <Route
+            path="/admin"
+            element={role === "admin" ? <AdminPage /> : <></>}
+          />
         </Route>
 
         <Route

@@ -7,6 +7,7 @@ type InitialStateType = {
   length: number;
   isLoading: boolean;
   current: OrderType[];
+  currentOrder: OrderType | null;
 };
 
 const initialState: InitialStateType = {
@@ -14,6 +15,7 @@ const initialState: InitialStateType = {
   length: 0,
   isLoading: true,
   current: [],
+  currentOrder: null,
 };
 
 export const getOrders = createAsyncThunk(
@@ -30,6 +32,12 @@ const orderSlice = createSlice({
   name: "ORDER",
   initialState,
   reducers: {
+    setCurrentOrder: (state, action) => {
+      state.currentOrder = action.payload;
+    },
+    unSetCurrentOrder: (state) => {
+      state.currentOrder = null;
+    },
     setTabAction: (state, action) => {
       if (action.payload === 0) state.current = [];
       if (action.payload === 1)
@@ -72,6 +80,7 @@ const orderSlice = createSlice({
   },
 });
 
-export const { setTabAction } = orderSlice.actions;
+export const { setTabAction, unSetCurrentOrder, setCurrentOrder } =
+  orderSlice.actions;
 
 export default orderSlice.reducer;

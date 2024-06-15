@@ -1,8 +1,7 @@
 import "./searchResult.css";
 import { ProductType } from "../../../types/product.type";
 import { useAppDispatch } from "../../../store";
-import { setCurrent } from "../../../slice/product.slice";
-import { Delete, SquarePen } from "lucide-react";
+import { addProductToCart } from "../../../slice/cart.slice";
 
 type SearchResultProps = {
   result: ProductType[];
@@ -23,28 +22,14 @@ export const SearchResult = ({ isOpen, result }: SearchResultProps) => {
           result.map((item) => (
             <div
               onClick={() => {
-                dispatch(setCurrent(item._id));
+                dispatch(addProductToCart(item));
               }}
               onMouseDown={(e) => e.preventDefault()}
               key={item._id}
-              className="flex justify-between items-center pb-2 border-b-2"
+              className="flex cursor-pointer justify-between items-center pb-2 border-b-2"
             >
               <div className="pr-5 pt-2">
                 <span className="line-clamp-1 text-sm">{item?.name}</span>
-                <div className="flex gap-4 line-clamp-1 mt-4">
-                  <label
-                    htmlFor="update-product-banner"
-                    className="cursor-pointer"
-                  >
-                    <SquarePen />
-                  </label>
-                  <label
-                    htmlFor="delete-product-modal"
-                    className="cursor-pointer"
-                  >
-                    <Delete />
-                  </label>
-                </div>
               </div>
               <img
                 src={item?.imageList?.[0] ?? ""}

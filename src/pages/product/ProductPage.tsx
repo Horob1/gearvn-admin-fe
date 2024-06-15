@@ -55,8 +55,8 @@ const ProductPage = () => {
                     )
                     .map((item, index) => (
                       <tr key={item._id}>
-                        <th>{index + 1 + (page - 1) * PAGE_ITEMS}</th>
-                        <th
+                        <td>{index + 1 + (page - 1) * PAGE_ITEMS}</td>
+                        <td
                           className="tooltip tooltip-top tooltip-error"
                           data-tooltip={item?.name}
                         >
@@ -64,8 +64,8 @@ const ProductPage = () => {
                             ? item?.name.slice(0, 49)
                             : item?.name}
                           ...
-                        </th>
-                        <th>{item?.typeDevice}</th>
+                        </td>
+                        <td>{item?.typeDevice}</td>
                         <td>{convertDate(item?.createAt)}</td>
                         <td>{item?.stock}</td>
                         <td>

@@ -61,3 +61,11 @@ export const ORDER_TAB = [
   { titile: "Đã hoàn thành" },
   { titile: "Đã hủy" },
 ];
+
+export const ORDER_STATUS = [
+  "pending",
+  "accepted",
+  "shipping",
+  "completed",
+  "rejected",
+];

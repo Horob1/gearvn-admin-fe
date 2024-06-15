@@ -1,34 +1,24 @@
-import { PackageSearch } from "lucide-react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { SearchResult } from "./SearchResult";
 import { ProductType } from "../../../types/product.type";
-import axios from "./../../../utils/customAxios.ts";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { GetProducts } from "../../product/components/GetProducts";
 
 export const SearchProduct = () => {
-  const searchRef = useRef<AbortController>();
   const [isOpen, setIsOpen] = useState(false);
+  const product = useSelector((state: RootState) => state.product.list);
   const [searchResult, setSearchResult] = useState<ProductType[]>([]);
-  const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.value) {
       setSearchResult([]);
       return;
     }
-    if (searchRef.current) searchRef.current.abort();
-    searchRef.current = new AbortController();
-    const signal = searchRef.current.signal;
-    //trycatch(() =>
-    try {
-      const res = await axios.get(
-        "/api/product?limit=10&name=" + event.target.value,
-        {
-          signal,
-        }
-      );
-
-      setSearchResult(res?.data?.filterProduct ?? []);
-    } catch (error) {
-      //
-    }
+    //tìm kiếm
+    const result = product.filter((item) =>
+      item.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    setSearchResult(result);
   };
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     if (
@@ -40,23 +30,21 @@ export const SearchProduct = () => {
     setIsOpen(false);
   };
   return (
-    <div className="relative">
+    <div className="relative flex gap-4 items-center m-auto">
+      <h1 className="text-error font-semibold"> Tìm sản phẩm</h1>
       <input
         id="search-product"
         type="text"
         onChange={handleSearch}
         onFocus={() => setIsOpen(true)}
         onBlur={handleBlur}
-        className="input w-96 border-error pr-8"
+        className="input border-error pr-8"
         placeholder="Tên sản phẩm"
       ></input>
-      <PackageSearch
-        color="#F31260"
-        className="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer"
-      />
       <div id="search-result-item">
         <SearchResult isOpen={isOpen} result={searchResult} />
       </div>
+      <GetProducts />
     </div>
   );
 };
