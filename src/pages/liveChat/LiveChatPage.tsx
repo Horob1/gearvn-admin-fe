@@ -2,7 +2,18 @@ import { Home } from "lucide-react";
 import ava from "./../../assets/gearvn.png";
 import { ChatBox } from "./components/ChatBox";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Socket, io } from "socket.io-client";
 export const LiveChatPage = () => {
+  const [socket, setSocket] = useState<Socket>();
+  useEffect(() => {
+    const newSocket: Socket = io(import.meta.env.VITE_API_BASE_URL);
+    setSocket(newSocket);
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
+  useEffect(() => {}, [])
   return (
     <div className="main-container p-4 m-auto rounded-xl shadow-xl w-full md:max-w-[90%] xl:max-w-screen-xl md:min-h-[80%] bg-[#F5F5F5] animate-growth grid grid-cols-12 gap-4">
       <div className="h-[680px] col-span-3 bg-white rounded-md">
