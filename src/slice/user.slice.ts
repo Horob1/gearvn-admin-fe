@@ -13,7 +13,7 @@ type UserState = {
 };
 
 const initialState: UserState = {
-  info: { _id: "", name: "", staffCode: "", role: "" },
+  info: { _id: "",username: "", name: "", staffCode: "", role: "" },
   isAuthenticated: isAuth,
 };
 
