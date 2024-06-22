@@ -43,8 +43,8 @@ export const ChatBox = ({ user, socket }: ChatBoxProps) => {
       return;
     }
 
-    const newMessage: MessageType = {
-      message: message,
+    const newMessage = {
+      content: message,
       position: "end",
     };
 
@@ -53,7 +53,10 @@ export const ChatBox = ({ user, socket }: ChatBoxProps) => {
         ...newMessage,
         userId: user.userId,
       });
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { position: "end", message: message },
+      ]);
       setMessage("");
     } catch (error) {
       toast.error("Lỗi kết nối đến server");
