@@ -102,20 +102,20 @@ export const LiveChatPage = () => {
                         fontWeight: checks[index] ? "700" : "400",
                       }}
                     >
-                      {user?.conversation[user?.conversation.length - 1]
-                        .position === "start"
+                      {user?.conversation?.[user?.conversation.length - 1]
+                        ?.position === "start"
                         ? "Khách"
                         : "Bạn"}
                       {": "}
-                      {user?.conversation[
-                        user?.conversation.length - 1
-                      ].message.slice(
+                      {user?.conversation?.[
+                        user?.conversation?.length - 1
+                      ]?.message?.slice(
                         0,
-                        user?.conversation[user?.conversation.length - 1]
+                        user?.conversation[user?.conversation?.length - 1]
                           .message.length > 10
                           ? 10
-                          : user?.conversation[user?.conversation.length - 1]
-                              .message.length - 1
+                          : user?.conversation[user?.conversation?.length - 1]
+                              ?.message?.length - 1
                       )}
                       ...
                     </h5>
