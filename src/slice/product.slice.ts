@@ -61,7 +61,6 @@ const productSlice = createSlice({
     builder.addCase(getProducts.rejected, (state) => {
       state.length = initialState.length;
       state.list = initialState.list;
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
     });
     builder.addCase(getProducts.pending, (state) => {
       state.isLoading = true;
@@ -81,7 +80,6 @@ const productSlice = createSlice({
       }
     });
     builder.addCase(deleteProduct.rejected, (state) => {
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
       state.current = null;
     });
   },

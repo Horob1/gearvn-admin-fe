@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "./../utils/customAxios.ts";
-import toast from "react-hot-toast";
 import { OrderType } from "../types/order.type.ts";
 type InitialStateType = {
   list: OrderType[];
@@ -72,7 +71,6 @@ const orderSlice = createSlice({
     builder.addCase(getOrders.rejected, (state) => {
       state.length = initialState.length;
       state.list = initialState.list;
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
     });
     builder.addCase(getOrders.pending, (state) => {
       state.isLoading = true;

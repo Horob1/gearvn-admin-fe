@@ -59,7 +59,6 @@ const bannerSlice = createSlice({
     builder.addCase(getBanners.rejected, (state) => {
       state.length = initialState.length;
       state.list = initialState.list;
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
     });
     builder.addCase(getBanners.pending, (state) => {
       state.isLoading = true;
@@ -79,7 +78,6 @@ const bannerSlice = createSlice({
       }
     });
     builder.addCase(deleteBanner.rejected, (state) => {
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
       state.current = null;
     });
   },

@@ -61,7 +61,6 @@ const promotionSlice = createSlice({
     builder.addCase(getPromotions.rejected, (state) => {
       state.length = initialState.length;
       state.list = initialState.list;
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
     });
     builder.addCase(getPromotions.pending, (state) => {
       state.isLoading = true;
@@ -81,7 +80,6 @@ const promotionSlice = createSlice({
       }
     });
     builder.addCase(deletePromotion.rejected, (state) => {
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
       state.current = null;
     });
   },
