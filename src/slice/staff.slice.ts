@@ -60,7 +60,6 @@ const staffSlice = createSlice({
     builder.addCase(getStaffList.rejected, (state) => {
       state.length = initialState.length;
       state.list = initialState.list;
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
     });
     builder.addCase(getStaffList.pending, (state) => {
       state.isLoading = true;
@@ -80,7 +79,6 @@ const staffSlice = createSlice({
       }
     });
     builder.addCase(deleteStaff.rejected, (state) => {
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
       state.current = null;
     });
   },

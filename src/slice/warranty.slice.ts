@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "./../utils/customAxios.ts";
-import toast from "react-hot-toast";
 import { WarrantyType } from "../types/warranty.type.ts";
 type InitialStateType = {
   list: WarrantyType[];
@@ -47,7 +46,6 @@ const warrantySlice = createSlice({
     builder.addCase(getWarranties.rejected, (state) => {
       state.length = initialState.length;
       state.list = initialState.list;
-      toast.error("Có lỗi! Vui lòng thử lại sau!");
     });
     builder.addCase(getWarranties.pending, (state) => {
       state.isLoading = true;
